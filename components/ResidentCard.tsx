@@ -1,9 +1,8 @@
 import React from 'react'
 import styles from '../styles/ResidentCard.module.css'
+import { Resident } from '../types'
 
-export default function ResidentCard({ name, status, species, gender, image }: {
-    name: string, status: string, species: string, gender: string, image: string
-}) {
+export default function ResidentCard({ name, status, species, gender, image }: Resident) {
     return (
         <>
             <a className={styles.card}>
