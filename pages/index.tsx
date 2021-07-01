@@ -10,6 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useState, useEffect } from "react"
 import { useRouter } from 'next/router'
+import { Location } from '../../types'
 
 export async function getServerSideProps(context: { query: { page: string, dimension: string, type: string } }) {
   const page = parseInt(context.query.page)
@@ -30,14 +31,6 @@ export async function getServerSideProps(context: { query: { page: string, dimen
   };
 }
 
-
-
-interface Location {
-  dimension: string,
-  id: string,
-  name: string,
-  type: string,
-}
 interface HomeProps {
   locations: [Location],
   pages: number,

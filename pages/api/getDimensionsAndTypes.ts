@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import getLocations from "../../functions/getLocations"
+import { Location } from '../../types'
 
 type Dimensions = [string]
 
@@ -9,27 +10,6 @@ type Types = [string]
 type DimensionsAndTypes = {
     dimensions: Dimensions,
     types: Types,
-}
-
-
-interface Location {
-    id: string,
-    name: string,
-    type: string,
-    dimension: string,
-    residents: {
-        id: string,
-        name: string,
-        status: string,
-        species: string,
-        type: string,
-        gender: string,
-        origin: {
-            id: string,
-            name: string,
-        },
-        image: string,
-    }
 }
 
 interface LocationsData {
