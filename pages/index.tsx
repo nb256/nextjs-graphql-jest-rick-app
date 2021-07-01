@@ -10,7 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useState, useEffect } from "react"
 import { useRouter } from 'next/router'
-import { Location } from '../../types'
+import { Location } from '../types'
 
 export async function getServerSideProps(context: { query: { page: string, dimension: string, type: string } }) {
   const page = parseInt(context.query.page)
@@ -18,7 +18,9 @@ export async function getServerSideProps(context: { query: { page: string, dimen
   const type = context.query.type
   const locationsData = await getLocations({ page, filter: { type, dimension } })
 
-  const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+  // see https://vercel.com/docs/environment-variables for vercel environment variables
+  const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_VERCEL_URL || process.env.NEXT_PUBLIC_BASE_URL
+
   const dimensionsAndTypesData = await fetch(`${NEXT_PUBLIC_BASE_URL}/api/getDimensionsAndTypes`)
   const dimensionsAndTypesJsonData = await dimensionsAndTypesData.json()
   return {
@@ -70,39 +72,42 @@ export default function Home({ locations, pages, types, dimensions }: HomeProps)
           Rick and Morty Locations
         </h1>
 
-        <FormControl style={{ width: "250px", marginTop: "20px" }}>
-          <InputLabel id="types-selection-label">Filter by Types</InputLabel>
-          <Select
-            labelId="types-selection-label"
-            id="types-selection"
-            value={selectedType}
-            onChange={(event) => setSelectedType(event.target.value as string)}
-            input={<Input />}
-          >
-            {["", ...types].map((name) => (
-              <MenuItem key={name} value={name}>
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <div className={styles.inputContainer}>
+          <FormControl style={{ width: "250px", margin: "20px" }}>
+            <InputLabel id="types-selection-label">Filter by Types</InputLabel>
+            <Select
+              labelId="types-selection-label"
+              id="types-selection"
+              value={selectedType}
+              onChange={(event) => setSelectedType(event.target.value as string)}
+              input={<Input />}
+            >
+              {["", ...types].map((name) => (
+                <MenuItem key={name} value={name}>
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
-        <FormControl style={{ width: "250px", marginTop: "20px" }}>
-          <InputLabel id="dimensions-selection-label">Filter by Dimensions</InputLabel>
-          <Select
-            labelId="dimensions-selection-label"
-            id="dimensions-selection"
-            value={selectedDimension}
-            onChange={(event) => setSelectedDimension(event.target.value as string)}
-            input={<Input />}
-          >
-            {["", ...dimensions].map((name) => (
-              <MenuItem key={name} value={name}>
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+          <FormControl style={{ width: "250px", margin: "20px" }}>
+            <InputLabel id="dimensions-selection-label">Filter by Dimensions</InputLabel>
+            <Select
+              labelId="dimensions-selection-label"
+              id="dimensions-selection"
+              value={selectedDimension}
+              onChange={(event) => setSelectedDimension(event.target.value as string)}
+              input={<Input />}
+            >
+              {["", ...dimensions].map((name) => (
+                <MenuItem key={name} value={name}>
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+
 
 
         <div className={styles.grid}>
@@ -113,8 +118,6 @@ export default function Home({ locations, pages, types, dimensions }: HomeProps)
                 <p><b>dimension: </b>{location.dimension}</p>
                 <p><b>type: </b>{location.type}</p>
               </a></Link>)}
-
-
         </div>
         {Array.from({ length: pages }, (_, i) => i + 1).map(page =>
           <span key={page} onClick={() => setPage(page)}>
