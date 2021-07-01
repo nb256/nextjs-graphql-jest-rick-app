@@ -44,19 +44,19 @@ export default function Home({ locations, pages, types, dimensions }: HomeProps)
   const router = useRouter()
   const [selectedType, setSelectedType] = useState<string>(router.query.type as string || "");
   const [selectedDimension, setSelectedDimension] = useState<string>(router.query.dimension as string || "");
-  const [page, setPage] = useState<number>(parseInt(router.query.page as string) || 0);
+  const [selectedPage, setSelectedPage] = useState<number>(parseInt(router.query.page as string) || 0);
 
   useEffect(() => {
     router.push({
       pathname: '/',
       query: {
-        page: page,
+        page: selectedPage,
         type: selectedType,
         dimension: selectedDimension
       },
     })
 
-  }, [selectedType, selectedDimension, page])
+  }, [selectedType, selectedDimension, selectedPage])
 
   return (
     <div className={styles.container}>
@@ -119,12 +119,16 @@ export default function Home({ locations, pages, types, dimensions }: HomeProps)
                 <p><b>type: </b>{location.type}</p>
               </a></Link>)}
         </div>
-        {Array.from({ length: pages }, (_, i) => i + 1).map(page =>
-          <span key={page} onClick={() => setPage(page)}>
-            <a>{page}</a>
-          </span>
-
-        )}
+        <div className={styles.paginationContainer}>
+          {Array.from({ length: pages }, (_, i) => i + 1).map(page =>
+            page === selectedPage ? <span key={page} className={styles.selectedPaginationItem} onClick={() => setSelectedPage(page)}>
+              <a>{page}</a>
+            </span> :
+              <span key={page} className={styles.paginationItem} onClick={() => setSelectedPage(page)}>
+                <a>{page}</a>
+              </span>
+          )}
+        </div>
       </main>
 
       <footer className={styles.footer}>
@@ -139,6 +143,6 @@ export default function Home({ locations, pages, types, dimensions }: HomeProps)
           </span>
         </a>
       </footer>
-    </div>
+    </div >
   )
 }
