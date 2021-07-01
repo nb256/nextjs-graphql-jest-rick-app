@@ -46,18 +46,18 @@ interface HomeProps {
 }
 
 export default function Home({ locations, pages, types, dimensions }: HomeProps) {
-  const [selectedType, setSelectedType] = useState<string | "">("");
-  const [selectedDimension, setSelectedDimension] = useState<string | "">("");
-  const [page, setPage] = useState<number>(1);
   const router = useRouter()
-
+  const [selectedType, setSelectedType] = useState<string>(router.query.type as string || "");
+  const [selectedDimension, setSelectedDimension] = useState<string>(router.query.dimension as string || "");
+  const [page, setPage] = useState<number>(parseInt(router.query.page as string) || 0);
 
   useEffect(() => {
     router.push({
       pathname: '/',
       query: {
         page: page,
-        type: selectedType, dimension: selectedDimension
+        type: selectedType,
+        dimension: selectedDimension
       },
     })
 
@@ -117,7 +117,8 @@ export default function Home({ locations, pages, types, dimensions }: HomeProps)
             <Link key={location.id} href={`/location/${location.id}`}>
               <a className={styles.card}>
                 <h2>{location.name}</h2>
-                <p>{location.dimension}</p>
+                <p><b>dimension: </b>{location.dimension}</p>
+                <p><b>type: </b>{location.type}</p>
               </a></Link>)}
 
 

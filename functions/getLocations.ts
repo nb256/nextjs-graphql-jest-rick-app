@@ -1,7 +1,7 @@
 import client from "../apollo-client";
 import { gql } from "@apollo/client";
 
-const getLocations = async ({ page, filter }: { page: number, filter?: { type: string, dimension: string } }) => {
+const getLocations = async ({ page, filter }: { page: number, filter?: { type?: string, dimension?: string } }) => {
   try {
     const { data } = await client.query({
       query: gql`
