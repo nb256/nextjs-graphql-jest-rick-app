@@ -1,6 +1,6 @@
 import { Location } from "../types"
 
-export default ({ location }: { location: Location }) => {
+const countResidentStats = ({ location }: { location: Location }) => {
     let deadCount = 0;
     let aliveCount = 0;
     let guestCount = 0;
@@ -38,3 +38,5 @@ export default ({ location }: { location: Location }) => {
     }
 
 }
+
+export default countResidentStats
