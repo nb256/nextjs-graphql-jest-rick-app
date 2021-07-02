@@ -28,6 +28,9 @@ interface LocationDetailsProps {
 }
 
 export default function LocationDetails({ location }: LocationDetailsProps) {
+    if (!location) {
+        return <div>Location is not found.</div>;
+    }
     return (
         <div className={styles.container}>
             <Head>
