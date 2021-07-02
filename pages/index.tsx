@@ -34,10 +34,10 @@ export async function getServerSideProps(context: { query: { page: string, dimen
 }
 
 interface HomeProps {
-  locations: [Location],
+  locations: Location[],
   pages: number,
-  types: [string],
-  dimensions: [string],
+  types: string[],
+  dimensions: string[],
 }
 
 export default function Home({ locations, pages, types, dimensions }: HomeProps) {

@@ -3,9 +3,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import getLocations from "../../functions/getLocations"
 import { Location } from '../../types'
 
-type Dimensions = [string]
+type Dimensions = string[]
 
-type Types = [string]
+type Types = string[]
 
 type DimensionsAndTypes = {
     dimensions: Dimensions,
@@ -17,7 +17,7 @@ interface LocationsData {
         info: {
             pages: number
         }
-        results: [Location]
+        results: Location[]
     }
 }
 
@@ -48,5 +48,5 @@ export default async function handler(
         types.add(location.type)
     })
 
-    res.status(200).json({ types: <[string]>Array.from(types), dimensions: <[string]>Array.from(dimensions) })
+    res.status(200).json({ types: <string[]>Array.from(types), dimensions: <string[]>Array.from(dimensions) })
 }
