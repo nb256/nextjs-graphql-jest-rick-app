@@ -14,7 +14,7 @@ export interface Resident {
     type: string,
     gender: string,
     origin: {
-        id: string,
+        id: string | null,
         name: string,
     },
     image: string,

@@ -28,7 +28,6 @@ interface LocationDetailsProps {
 }
 
 export default function LocationDetails({ location }: LocationDetailsProps) {
-    console.log({ location })
     return (
         <div className={styles.container}>
             <Head>

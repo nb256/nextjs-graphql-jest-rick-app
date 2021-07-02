@@ -113,7 +113,7 @@ export default function Home({ locations, pages, types, dimensions }: HomeProps)
         <div className={styles.grid}>
           {locations?.map(location =>
             <Link key={location.id} href={`/location/${location.id}`}>
-              <a className={styles.card}>
+              <a className={styles.card} data-testid="location">
                 <h2>{location.name}</h2>
                 <p><b>dimension: </b>{location.dimension}</p>
                 <p><b>type: </b>{location.type}</p>
