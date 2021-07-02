@@ -78,7 +78,7 @@ export default function Home({ locations, pages, types, dimensions }: HomeProps)
               labelId="types-selection-label"
               id="types-selection"
               value={selectedType}
-              onChange={(event) => setSelectedType(event.target.value as string)}
+              onChange={(event) => { setSelectedType(event.target.value as string); setSelectedPage(1) }}
               input={<Input />}
             >
               {["", ...types].map((name) => (
@@ -95,7 +95,7 @@ export default function Home({ locations, pages, types, dimensions }: HomeProps)
               labelId="dimensions-selection-label"
               id="dimensions-selection"
               value={selectedDimension}
-              onChange={(event) => setSelectedDimension(event.target.value as string)}
+              onChange={(event) => { setSelectedDimension(event.target.value as string); setSelectedPage(1) }}
               input={<Input />}
             >
               {["", ...dimensions].map((name) => (
