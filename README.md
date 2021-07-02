@@ -22,7 +22,7 @@ Run tests:
 yarn test
 ```
 
-**[Live demo](https://<waiting-for-deploy>.now.sh/)**.
+**[Live demo](https://nextjs-graphql-jest-rick-app.vercel.app)**.
 
 - [Next.js](https://nextjs.org/)
 - [Apollo-Client](https://www.apollographql.com/docs/react/)
