@@ -8,9 +8,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { useState, useEffect } from "react"
-import { useRouter } from 'next/router'
-import { Location } from '../types'
+import { useState, useEffect } from "react";
+import { useRouter } from 'next/router';
+import { Location } from '../types';
 
 export async function getServerSideProps(context: { query: { page: string, dimension: string, type: string } }) {
   const page = parseInt(context.query.page)
@@ -18,8 +18,7 @@ export async function getServerSideProps(context: { query: { page: string, dimen
   const type = context.query.type
   const locationsData = await getLocations({ page, filter: { type, dimension } })
 
-  // see https://vercel.com/docs/environment-variables for vercel environment variables
-  const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_VERCEL_URL || process.env.NEXT_PUBLIC_BASE_URL
+  const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
   const dimensionsAndTypesData = await fetch(`${NEXT_PUBLIC_BASE_URL}/api/getDimensionsAndTypes`)
   const dimensionsAndTypesJsonData = await dimensionsAndTypesData.json()
