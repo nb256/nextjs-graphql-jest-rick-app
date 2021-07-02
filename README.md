@@ -16,6 +16,12 @@ yarn install
 yarn start
 ```
 
+Run tests:
+
+```sh
+yarn test
+```
+
 **[Live demo](https://<waiting-for-deploy>.now.sh/)**.
 
 - [Next.js](https://nextjs.org/)
