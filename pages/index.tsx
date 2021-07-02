@@ -19,7 +19,7 @@ export async function getServerSideProps(context: { query: { page: string, dimen
   const locationsData = await getLocations({ page, filter: { type, dimension } })
 
   // see https://vercel.com/docs/environment-variables for vercel environment variables
-  const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_VERCEL_URL || process.env.NEXT_PUBLIC_BASE_URL
+  const NEXT_PUBLIC_BASE_URL = process.env.VERCEL_URL || process.env.NEXT_PUBLIC_BASE_URL
 
   const dimensionsAndTypesData = await fetch(`${NEXT_PUBLIC_BASE_URL}/api/getDimensionsAndTypes`)
   const dimensionsAndTypesJsonData = await dimensionsAndTypesData.json()
