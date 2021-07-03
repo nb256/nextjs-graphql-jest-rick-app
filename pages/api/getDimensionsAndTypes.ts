@@ -43,8 +43,6 @@ export default async function handler(
 
     allLocations.forEach(location => {
         dimensions.add(location.dimension)
-    })
-    allLocations.forEach(location => {
         types.add(location.type)
     })
 
